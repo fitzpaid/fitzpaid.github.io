@@ -14,7 +14,7 @@ One simple solution is to use an AsyncTurnPool.
 ### Code 
 In practice an AsyncTurnPool is just an array that we add actors to when their animations begin. We then remove actors from this pool when their animation is finished.
 
-```
+```gdscript
 // AsyncTurnPool.gd
 var pool := []
 signal turn_over
@@ -27,7 +27,7 @@ func remove(node: Node):
     if pool.size() == 0: turn_over.emit()
 ```
 
-```
+```gdscript
 // BattleManager.gd
 // turn pool loaded as AutoLoad
 func start_turns():
@@ -45,7 +45,7 @@ func start_turns():
     start_player_turn()
 ```
 
-```
+```gdscript
 // PlayerController.gd
 do turn_actions():
     AsyncTurnPool.add(self)

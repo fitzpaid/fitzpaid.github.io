@@ -1,11 +1,13 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('gamedev')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const writing = (await getCollection('writing')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
@@ -35,7 +37,18 @@ const posts = (await getCollection('gamedev')).sort(
 					))
 				}
 			</ul>
-			
+			<h4> Links to Writing </h4>
+			<ul>
+				{
+					writing.map((post) => (
+						<li>
+							<a href={`/writing/${post.slug}/`}>
+								<span class="title">{post.data.title}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
 		</main>
 	</body>
 </html>

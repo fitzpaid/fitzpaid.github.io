@@ -13,4 +13,15 @@ const gamedev = defineCollection({
 	}),
 });
 
-export const collections = { gamedev };
+const writing = defineCollection({
+	type: 'content',
+	// Type-check frontmatter using a schema
+	schema: z.object({
+		title: z.string(),
+		// Transform string to Date object
+		pubDate: z.coerce.date(),
+	}),
+});
+
+
+export const collections = { gamedev, writing };
